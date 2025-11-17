@@ -1,0 +1,49 @@
+https://us-east-2.signin.aws.amazon.com/oauth?client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcanvas&code_challenge=W-tGtWYJxOKmk69Un1Lg2WaFyST9eOT7g4ROrcMLQfg&code_challenge_method=SHA-256&response_type=code&redirect_uri=https%3A%2F%2Fus-east-2.console.aws.amazon.com%2Fconsole%2Fhome%3FhashArgs%3D%2523%26isauthcode%3Dtrue%26region%3Dus-east-2%26state%3DhashArgsFromTB_us-east-2_71afde91a0b76f20
+
+roberto.lopez.koopalo@hotmail.com
+FcO5P^0*
+
+ssh -i "C:\Users\roerr\OneDrive\Ministerio de Comunicaciones\wordpress-key.pem" ubuntu@18.117.106.35
+
+
+sudo apt update
+sudo apt install apache2 mysql-server php php-mysql libapache2-mod-php php-cli unzip -y
+sudo systemctl enable apache2
+sudo systemctl start apache2
+
+
+http:18.117.106.35
+
+
+
+mysql
+sudo mysql_secure_installation
+
+sudo mysql -u root -p
+
+CREATE DATABASE wordpress_db;
+CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'MiClaveSegura123!';
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wp_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+WordPress
+cd /tmp
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+sudo mkdir /var/www/html/wordpress
+sudo mv wordpress /var/www/html/
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/HTML
+
+cd /var/www/html
+sudo cp wp-config-sample.php wp-config.php
+sudo nano wp-config.php
+define( 'DB_NAME', 'wordpress_db' );
+define( 'DB_USER', 'wp_user' );
+define( 'DB_PASSWORD', 'MiClaveSegura123!' );
+define( 'DB_HOST', 'localhost' );
+
+
+sudo systemctl restart apache2
